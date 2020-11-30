@@ -14,11 +14,3 @@ app.use('/api/todo', require('./routes/api/todo'))
 app.get('/', (_, res) => res.send('<h1>Hello World!</h1>'))
 
 app.listen(PORT, () => console.log(`server started on port: ${PORT}`))
-
-/**
- * - Create server ✓
- * - Create psql database ✓
- * - Create api routes ✓
- * - Add Auth (firebase)
- * - Test
- */

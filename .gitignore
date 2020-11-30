@@ -12,5 +12,7 @@ client/web-build/
 */yarn-error.log
 */node_modules/**/*
 
+notes.txt
+
 # macOS
 client/.DS_Store

@@ -111,17 +111,3 @@ const styles = StyleSheet.create({
     color: 'white'
   }
 });
-
-/**
- * light
- * #f52549
- * #fa6775
- * #ffd64d
- * #9bc01c
- *
- * dark
- * #363237
- * #2d4262
- * #73605b
- * #d09683
- */
