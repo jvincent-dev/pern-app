@@ -1,4 +1,4 @@
-client/expo/*
+client/.expo/*
 client/npm-debug.*
 client/*.jks
 client/*.p8
