@@ -37,7 +37,7 @@ router.get('/', (req, res) => {
 // update - updates a note (todo_id, description)
 router.put('/', (req, res) => {
   const { description, todo_id } = req.body
-  const query = 'UPDATE todos SET description = $1, is_edited = true, last_edited = NOW() WHERE todo_id = $2 RETURNING *'
+  const query = 'UPDATE todos SET description = $1, last_edited = NOW() WHERE todo_id = $2 RETURNING *'
   const queryParams = [description, todo_id]
 
   pool.query(query, queryParams)

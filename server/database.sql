@@ -11,3 +11,6 @@ CREATE TABLE todos (
 
 ALTER TABLE todos
 ADD is_completed BOOLEAN DEFAULT false;
+
+ALTER TABLE todos
+DROP COLUMN is_edited;

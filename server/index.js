@@ -11,6 +11,6 @@ app.use(express.json())
 app.use('/api/todo', require('./routes/api/todo'))
 
 // routes
-app.get('/', (_, res) => res.send('<h1>Hello World!</h1>'))
+app.get('/', (_, res) => res.send('<h1 style="font-family: sans-serif;">Hello World!</h1>'))
 
 app.listen(PORT, () => console.log(`server started on port: ${PORT}`))
