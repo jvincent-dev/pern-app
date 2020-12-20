@@ -31,10 +31,7 @@ export default function LogIn({ navigation }: any) {
       <StatusBar style="dark" />
 
       <KeyboardAvoidingView enabled behavior='padding' style={styles.inputContainer}>
-        <MyAppText type='h1' centered>
-          Pern:{'\n'}
-          <MyAppText type='h2'>A To Do App</MyAppText>
-        </MyAppText>
+        <MyAppText type='h1' centered>Sign Up</MyAppText>
 
         <TextInput
           mode='outlined'
@@ -77,7 +74,9 @@ export default function LogIn({ navigation }: any) {
           <MyAppText style={{ color: 'white' }}>Sign Up</MyAppText>
         </TouchableRipple>
 
-        <MyAppText onPress={() => navigation.navigate('login')} type='subtext' centered>Log in</MyAppText>
+        <TouchableRipple onPress={() => navigation.navigate('login')} style={styles.login}>
+          <MyAppText type='subtext' centered>Log in</MyAppText>
+        </TouchableRipple>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -109,5 +108,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#B3001B',
     fontWeight: 'bold',
     color: 'white'
+  },
+  login: {
+    alignSelf: 'center',
+    padding: 4
   }
 });

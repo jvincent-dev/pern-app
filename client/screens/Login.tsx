@@ -60,11 +60,15 @@ export default function LogIn({ navigation }: any) {
         </TouchableRipple>
 
         <View style={styles.footer}>
-          <MyAppText onPress={() => navigation.navigate('signup')} type='subtext'>Sign up</MyAppText>
+          <TouchableRipple onPress={() => navigation.navigate('signup')} style={{ padding: 4 }}>
+            <MyAppText type='subtext'>Sign up</MyAppText>
+          </TouchableRipple>
 
-          <MyAppText onPress={() => setIsPassLost(!isPassLost)} type='subtext'>
-            {isPassLost ? 'Well too bad...' : 'Forgot password?'}
-          </MyAppText>
+          <TouchableRipple onPress={() => setIsPassLost(!isPassLost)} style={{ padding: 4 }}>
+            <MyAppText type='subtext'>
+              {isPassLost ? 'Well too bad...' : 'Forgot password?'}
+            </MyAppText>
+          </TouchableRipple>
         </View>
 
       </KeyboardAvoidingView>
