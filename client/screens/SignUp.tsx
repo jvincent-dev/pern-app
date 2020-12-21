@@ -4,6 +4,7 @@ import { StyleSheet, SafeAreaView, KeyboardAvoidingView } from 'react-native';
 import { TextInput, TouchableRipple } from 'react-native-paper'
 import MyAppText from '../components/MyAppText'
 import firebase from 'firebase'
+import ErrorText from '../components/ErrorText'
 
 export default function LogIn({ navigation }: any) {
   const [name, setName]: [string, Function] = useState('')
@@ -68,7 +69,7 @@ export default function LogIn({ navigation }: any) {
           secureTextEntry
         />
 
-        {!!errorMessage.length && <MyAppText style={styles.error} centered type='subtext'>{errorMessage}</MyAppText>}
+        {!!errorMessage.length && <ErrorText errorMessage={errorMessage} />}
 
         <TouchableRipple onPress={createAccount} style={styles.button}>
           <MyAppText style={{ color: 'white' }}>Sign Up</MyAppText>
