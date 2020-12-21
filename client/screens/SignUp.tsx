@@ -71,11 +71,11 @@ export default function LogIn({ navigation }: any) {
 
         {!!errorMessage.length && <ErrorText errorMessage={errorMessage} />}
 
-        <TouchableRipple onPress={createAccount} style={styles.button}>
+        <TouchableRipple rippleColor='#c4c4c4' onPress={createAccount} style={styles.button}>
           <MyAppText style={{ color: 'white' }}>Sign Up</MyAppText>
         </TouchableRipple>
 
-        <TouchableRipple onPress={() => navigation.navigate('login')} style={styles.login}>
+        <TouchableRipple rippleColor='#c4c4c4' onPress={() => navigation.navigate('login')} style={styles.login}>
           <MyAppText type='subtext' centered>Log in</MyAppText>
         </TouchableRipple>
       </KeyboardAvoidingView>

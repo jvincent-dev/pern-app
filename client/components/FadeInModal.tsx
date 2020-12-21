@@ -14,7 +14,7 @@ export default function FadeInModal({ ...props }: any) {
           <View style={[styles.header, !title && { justifyContent: 'flex-end' }]}>
             {!!title && <MyAppText type='h2'>{title}</MyAppText>}
 
-            <TouchableRipple style={styles.close} onPress={onClose}>
+            <TouchableRipple rippleColor='#c4c4c4' style={styles.close} onPress={onClose}>
               <MaterialCommunityIcons name='close' size={24} />
             </TouchableRipple>
           </View>

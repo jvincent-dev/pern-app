@@ -56,16 +56,16 @@ export default function LogIn({ navigation }: any) {
 
         {!!errorMessage.length && <ErrorText errorMessage={errorMessage} />}
 
-        <TouchableRipple onPress={handleLogIn} style={styles.button}>
+        <TouchableRipple rippleColor='#c4c4c4' onPress={handleLogIn} style={styles.button}>
           <MyAppText style={{ color: 'white' }}>Log In</MyAppText>
         </TouchableRipple>
 
         <View style={styles.footer}>
-          <TouchableRipple onPress={() => navigation.navigate('signup')} style={{ padding: 4 }}>
+          <TouchableRipple rippleColor='#c4c4c4' onPress={() => navigation.navigate('signup')} style={{ padding: 4 }}>
             <MyAppText type='subtext'>Sign up</MyAppText>
           </TouchableRipple>
 
-          <TouchableRipple onPress={() => setIsPassLost(!isPassLost)} style={{ padding: 4 }}>
+          <TouchableRipple rippleColor='#c4c4c4' onPress={() => setIsPassLost(!isPassLost)} style={{ padding: 4 }}>
             <MyAppText type='subtext'>
               {isPassLost ? 'Well too bad...' : 'Forgot password?'}
             </MyAppText>
