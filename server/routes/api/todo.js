@@ -45,6 +45,17 @@ router.put('/', (req, res) => {
     .catch(err => res.status(400).json(createErrorObject('updated', err.message)))
 })
 
+// update - set task as completed (todo_id)
+router.put('/completed', (req, res) => {
+  const { todo_id } = req.body
+  const query = 'UPDATE todos SET is_completed = $1 WHERE todo_id = $2 RETURNING *'
+  const queryParams = [true, todo_id]
+
+  pool.query(query, queryParams)
+    .then(({ rows, rowCount }) => rowCount > 0 ? res.json(rows[0]) : res.status(400).send('Error: No note to edit.'))
+    .catch(err => res.status(400).json(createErrorObject('updated', err.message)))
+})
+
 // delete - deletes a note (todo_id)
 router.delete('/', (req, res) => {
   const { todo_id } = req.body
