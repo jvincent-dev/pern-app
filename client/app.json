@@ -27,6 +27,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "todoAPI": "https://d20464a3f390.ngrok.io/api/todo"
     }
   }
 }

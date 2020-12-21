@@ -22,7 +22,7 @@ interface ItemModalProps {
 }
 
 const addToDoTask = (user_id: string, description: string) =>
-  fetch(`${Constants.manifest.extra.testDomain}`, {
+  fetch(`${Constants.manifest.extra.todoAPI}`, {
     method: 'POST',
     headers: {
       'Authorization': user_id,
@@ -35,7 +35,7 @@ const addToDoTask = (user_id: string, description: string) =>
   }).then(res => res.ok ? res.json() : null)
 
 const editTodoTask = (userId: string, description: string, todo_id: string) =>
-  fetch(`${Constants.manifest.extra.testDomain}`, {
+  fetch(`${Constants.manifest.extra.todoAPI}`, {
     method: 'PUT',
     headers: {
       'Authorization': userId,

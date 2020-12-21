@@ -10,7 +10,7 @@ import TodoListItem from '../components/TodoListItem'
 import ListHeader from '../components/ListHeader'
 
 const handleCompletedTask = (userId: string, todo_id: string) =>
-  fetch(`${Constants.manifest.extra.testDomain}/completed`, {
+  fetch(`${Constants.manifest.extra.todoAPI}/completed`, {
     method: 'PUT',
     headers: {
       'Authorization': userId,
@@ -33,7 +33,7 @@ export default function Todo() {
     setIsLoading(true)
 
     if (currentUser)
-      fetch(`${Constants.manifest.extra.testDomain}`, {
+      fetch(`${Constants.manifest.extra.todoAPI}`, {
         headers: {
           'Authorization': currentUser.uid
         }
@@ -52,7 +52,7 @@ export default function Todo() {
     const { currentUser } = firebase.auth()
 
     if (currentUser)
-      return fetch(`${Constants.manifest.extra.testDomain}`, {
+      return fetch(`${Constants.manifest.extra.todoAPI}`, {
         method: 'DELETE',
         headers: {
           'Authorization': currentUser.uid,
