@@ -1,6 +1,8 @@
 --used to create postgres database
 CREATE DATABASE pern_todos;
 
+-- CREATE EXTENSION IF NOT EXISTS "uuid-ossp"; -- to enable uuid extension
+
 CREATE TABLE todos (
   todo_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
   user_id VARCHAR(80) NOT NULL,
