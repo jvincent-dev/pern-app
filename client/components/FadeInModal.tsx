@@ -1,8 +1,7 @@
 import React from 'react'
 import { View, Modal, StyleSheet } from 'react-native'
-import { TouchableRipple } from 'react-native-paper'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
 import MyAppText from './MyAppText'
+import TouchableRippleIcon from './TouchableRippleIcon'
 
 export default function FadeInModal({ ...props }: any) {
   const { isVisible, onClose, title = '', children } = props
@@ -14,9 +13,8 @@ export default function FadeInModal({ ...props }: any) {
           <View style={[styles.header, !title && { justifyContent: 'flex-end' }]}>
             {!!title && <MyAppText type='h2'>{title}</MyAppText>}
 
-            <TouchableRipple rippleColor='#c4c4c4' style={styles.close} onPress={onClose}>
-              <MaterialCommunityIcons name='close' size={24} />
-            </TouchableRipple>
+
+            <TouchableRippleIcon name='close' onPress={onClose} />
           </View>
 
           {children}

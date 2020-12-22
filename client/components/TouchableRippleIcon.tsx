@@ -17,7 +17,7 @@ export default function TouchableRippleIcon({ name, color, onPress }: any) {
 
 const styles = StyleSheet.create({
   listIcon: {
-    padding: 8,
+    padding: 4,
     borderRadius: 8
-  },
+  }
 })
