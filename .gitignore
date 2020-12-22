@@ -8,6 +8,8 @@ client/*.mobileprovision
 client/*.orig.*
 client/web-build/
 
+server/.env
+
 */yarn.lock
 */yarn-error.log
 */node_modules/**/*
