@@ -14,17 +14,21 @@ export default function LogIn({ navigation }: any) {
   const passwordInputRef = useRef<any>(null)
 
   const createAccount = () => {
-    const firebaseAuth = firebase.auth()
+    if (!!name && !!email && !!password) {
+      const firebaseAuth = firebase.auth()
 
-    firebaseAuth.createUserWithEmailAndPassword(email, password).then(user => {
-      if (user && firebaseAuth.currentUser)
-        firebaseAuth.currentUser.updateProfile({ displayName: name })
-    }).catch(err => {
-      if (err.message.includes('in use')) // let user know if email already used
-        setErrorMessage('Email already exists')
+      firebaseAuth.createUserWithEmailAndPassword(email, password).then(user => {
+        if (user && firebaseAuth.currentUser)
+          firebaseAuth.currentUser.updateProfile({ displayName: name })
+      }).catch(err => {
+        if (err.message.includes('in use')) // let user know if email already used
+          setErrorMessage('Email already exists')
 
-      console.log('Error:', err.message)
-    })
+        console.log('Error:', err.message)
+      })
+    } else
+      setErrorMessage(`Please have a name, email and password`)
+
   }
 
   return (
