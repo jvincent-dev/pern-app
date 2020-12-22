@@ -28,7 +28,6 @@ export default function LogIn({ navigation }: any) {
       })
     } else
       setErrorMessage(`Please have a name, email and password`)
-
   }
 
   return (
