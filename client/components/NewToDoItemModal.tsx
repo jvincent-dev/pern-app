@@ -71,7 +71,7 @@ export default function NewToDoItem(props: ItemModalProps) {
                 closeAndReset(newTodoItem)
           }).catch(e => setErrorMessage(e.message))
       else
-        addToDoTask(description, uid)
+        addToDoTask(uid, description)
           .then(newTodoItem => {
             if (newTodoItem)
               if (newTodoItem.msg) {
