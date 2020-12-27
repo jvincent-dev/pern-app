@@ -20,6 +20,6 @@ app.use('/api/todo', require('./routes/api/todo'))
 app.use(Sentry.Handlers.errorHandler())
 
 // routes
-app.get('/', (_, res) => res.send('<h1 style="font-family: sans-serif;">Hello World!</h1>'))
+app.get('/', (_, res) => res.redirect('https://expo.io/@jvincent/projects/pern-todo'))
 
 app.listen(PORT, () => console.log(`server started on port: ${PORT}`))
