@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, SafeAreaView, KeyboardAvoidingView, View } from 'react-native';
+import { StyleSheet, SafeAreaView, KeyboardAvoidingView, View, Platform } from 'react-native';
 import { TextInput, TouchableRipple } from 'react-native-paper'
 import MyAppText from '../components/MyAppText'
 import firebase from 'firebase'
@@ -25,7 +25,7 @@ export default function LogIn({ navigation }: any) {
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" />
 
-      <KeyboardAvoidingView enabled behavior='padding' style={styles.inputContainer}>
+      <KeyboardAvoidingView enabled={Platform.OS === 'ios'} behavior='padding' style={styles.inputContainer}>
         <MyAppText type='h1' centered>
           Pern:{'\n'}
           <MyAppText type='h2'>A To Do App</MyAppText>
