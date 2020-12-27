@@ -6,7 +6,7 @@
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
-    "description": "This is a simplistic todo app to demonstrate my ability to create an application using the PERN stack with expo.io and firebase auth",
+    "description": "A simplistic todo app to demonstrate my ability to create a PERN stack application with firebase-auth, expo.io and dokku",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
