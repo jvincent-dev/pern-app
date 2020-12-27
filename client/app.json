@@ -30,6 +30,18 @@
     },
     "extra": {
       "todoAPI": "https://d20464a3f390.ngrok.io/api/todo"
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "jvincent-dev",
+            "project": "pern-app",
+            "authToken": "<add-auth-token>"
+          }
+        }
+      ]
     }
   }
 }
