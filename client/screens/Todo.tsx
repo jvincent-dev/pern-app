@@ -145,7 +145,7 @@ export default function Todo() {
         contentContainerStyle={styles.listContainer}
         stickyHeaderIndices={[0]}
         ListHeaderComponent={() => <ListHeader />}
-        ListEmptyComponent={() => <MyAppText centered style={styles.emptyListComponent}>Uh-oh... stinky</MyAppText>}
+        ListEmptyComponent={() => <MyAppText centered style={styles.emptyListComponent}>Please add some tasks using button on the lower right.</MyAppText>}
         refreshControl={<RefreshControl refreshing={isLoading} onRefresh={updateTodoList} />}
         renderItem={({ item }: any) =>
           <TodoListItem

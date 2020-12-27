@@ -2,9 +2,11 @@
   "expo": {
     "name": "pern-todo",
     "slug": "pern-todo",
+    "privacy": "unlisted",
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
+    "description": "This is a simplistic todo app to demonstrate my ability to create an application using the PERN stack with expo.io and firebase auth",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -29,7 +31,7 @@
       "favicon": "./assets/favicon.png"
     },
     "extra": {
-      "todoAPI": "https://d20464a3f390.ngrok.io/api/todo"
+      "todoAPI": "https://pern.jvincent.dev/api/todo"
     },
     "hooks": {
       "postPublish": [
