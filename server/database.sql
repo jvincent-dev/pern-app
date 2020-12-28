@@ -16,3 +16,6 @@ ADD is_completed BOOLEAN DEFAULT false;
 
 ALTER TABLE todos
 DROP COLUMN is_edited;
+
+CREATE INDEX idx_user_id
+ON todos (user_id);
