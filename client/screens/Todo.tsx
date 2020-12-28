@@ -9,6 +9,31 @@ import NewToDoItemModal, { TodoItem } from '../components/NewToDoItemModal'
 import TodoListItem from '../components/TodoListItem'
 import ListHeader from '../components/ListHeader'
 
+const partitionAndSortTodos = (todoList: TodoItem[]) =>
+  todoList
+    .reduce((uncompletedAndCompleted: [TodoItem[], TodoItem[]], todoItem: TodoItem) => {
+      if (todoItem.is_completed)
+        uncompletedAndCompleted[1].push(todoItem)
+      else
+        uncompletedAndCompleted[0].push(todoItem)
+
+      return uncompletedAndCompleted
+    }, [[], []])
+    .reduce((sortedPartitionedList: TodoItem[], partitionedList: TodoItem[]) => {
+      const sortedList: TodoItem[] = partitionedList.sort((a: TodoItem, b: TodoItem) => {
+        if (a.description < b.description)
+          return -1
+        else if (a.description > b.description)
+          return 1
+
+        return 0
+      })
+
+      sortedPartitionedList.push(...sortedList)
+
+      return sortedPartitionedList
+    }, [])
+
 const handleCompletedTask = (userId: string, todo_id: string) =>
   fetch(`${Constants.manifest.extra.todoAPI}/completed`, {
     method: 'PUT',
@@ -43,7 +68,7 @@ export default function Todo() {
             if (list['msg']) {
               console.log(list.msg)
             } else
-              setTodoList(list)
+              setTodoList(partitionAndSortTodos(list))
           setIsLoading(false)
         })
   }
@@ -96,7 +121,7 @@ export default function Todo() {
 
                     updatedTodoList[updatedIndex] = completedTask
 
-                    setTodoList([...updatedTodoList])
+                    setTodoList(partitionAndSortTodos(updatedTodoList))
                   }
 
                   setIsLoading(false)
@@ -129,7 +154,7 @@ export default function Todo() {
             } else
               updatedTodoList.push(updatedItem)
 
-            setTodoList(updatedTodoList)
+            setTodoList(partitionAndSortTodos(updatedTodoList))
           }
 
           if (taskBeingEdited)
