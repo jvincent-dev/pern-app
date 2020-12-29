@@ -18,6 +18,7 @@ const TodoListItem = (props: any) => {
           onPress={handleCompletion}
           color='#f2f2f2'
           uncheckedColor='#f2f2f2'
+          theme={{ colors: { disabled: 'white' } }}
         />
 
         <View style={{ flexShrink: 1 }}>
