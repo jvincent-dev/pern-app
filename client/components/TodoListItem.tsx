@@ -13,6 +13,7 @@ const TodoListItem = (props: any) => {
     <View style={styles.listItem}>
       <View style={{ flexDirection: 'row', alignItems: 'center', flexShrink: 1 }}>
         <Checkbox.Android
+          disabled={item.is_completed}
           status={item.is_completed ? 'checked' : 'unchecked'}
           onPress={handleCompletion}
           color='#f2f2f2'
