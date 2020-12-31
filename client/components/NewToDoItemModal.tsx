@@ -21,7 +21,7 @@ interface ItemModalProps {
   taskBeingEdited?: TodoItem
 }
 
-const addToDoTask = (user_id: string, description: string) =>
+const addTask = (user_id: string, description: string) =>
   fetch(`${Constants.manifest.extra.todoAPI}`, {
     method: 'POST',
     headers: {
@@ -34,7 +34,7 @@ const addToDoTask = (user_id: string, description: string) =>
     })
   }).then(res => res.ok ? res.json() : null)
 
-const editTodoTask = (userId: string, description: string, todo_id: string) =>
+const editTask = (userId: string, description: string, todo_id: string) =>
   fetch(`${Constants.manifest.extra.todoAPI}`, {
     method: 'PUT',
     headers: {
@@ -62,7 +62,7 @@ export default function NewToDoItem(props: ItemModalProps) {
       if (!description)
         setErrorMessage(`please input a task`)
       else if (isEdit)
-        editTodoTask(uid, description, taskBeingEdited?.todo_id || '')
+        editTask(uid, description, taskBeingEdited?.todo_id || '')
           .then(newTodoItem => {
             if (newTodoItem)
               if (newTodoItem.msg) {
@@ -71,7 +71,7 @@ export default function NewToDoItem(props: ItemModalProps) {
                 closeAndReset(newTodoItem)
           }).catch(e => setErrorMessage(e.message))
       else
-        addToDoTask(uid, description)
+        addTask(uid, description)
           .then(newTodoItem => {
             if (newTodoItem)
               if (newTodoItem.msg) {

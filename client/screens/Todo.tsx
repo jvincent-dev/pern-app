@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { StyleSheet, FlatList, Alert, RefreshControl } from 'react-native'
 import { FAB } from 'react-native-paper'
 import Constants from 'expo-constants'
@@ -50,9 +50,9 @@ export default function Todo() {
   const [taskBeingEdited, setTaskBeingEdited]: [TodoItem | undefined, Function] = useState()
   const [isLoading, setIsLoading]: [boolean, Function] = useState(false)
 
-  useEffect(() => { updateTodoList() }, [])
+  useEffect(() => { updateTasks() }, [])
 
-  const updateTodoList = () => {
+  const updateTasks = () => {
     const { currentUser } = firebase.auth()
 
     setIsLoading(true)
@@ -73,29 +73,52 @@ export default function Todo() {
         })
   }
 
-  const deleteTodoItem = ({ todo_id }: TodoItem) => {
+  const deleteTask = (todo_id: string) => {
     const { currentUser } = firebase.auth()
 
     if (currentUser)
-      return fetch(`${Constants.manifest.extra.todoAPI}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': currentUser.uid,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ todo_id })
-      }).then(res => res.ok ? res.json() : null)
-        .then(deletedTodo => {
-          if (deletedTodo)
-            if (deletedTodo.msg) {
-              console.log(deletedTodo.msg)
-            } else
-              setTodoList([...todoList.filter(listItem => listItem.todo_id !== deletedTodo.todo_id)])
-        })
+      Alert.alert(
+        'Confirm Deletion',
+        'deleting a task cannot be reversed.',
+        [
+          {
+            text: 'cancel',
+            style: 'cancel',
+            onPress: () => null
+          },
+          {
+            text: 'delete',
+            style: 'destructive',
+            onPress: () => {
+              setIsLoading(true)
+
+              fetch(`${Constants.manifest.extra.todoAPI}`, {
+                method: 'DELETE',
+                headers: {
+                  'Authorization': currentUser.uid,
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ todo_id })
+              }).then(res => res.ok ? res.json() : null)
+                .then(deletedTodo => {
+                  if (deletedTodo)
+                    if (deletedTodo.msg) {
+                      console.log(deletedTodo.msg)
+                    } else
+                      setTodoList([...todoList.filter(listItem => listItem.todo_id !== deletedTodo.todo_id)])
+
+                  setIsLoading(false)
+                })
+            }
+          }
+        ]
+      )
   }
 
   const completeTask = (todo_id: string) => {
     const { currentUser } = firebase.auth()
+
+    setIsLoading(true)
 
     if (currentUser)
       Alert.alert(
@@ -137,6 +160,17 @@ export default function Todo() {
     setShowNewTodoModal(true)
   }
 
+  const renderTaskItem = useCallback(({ item }: any) =>
+    <TodoListItem
+      item={item}
+      handleCompletion={() => completeTask(item.todo_id)}
+      onEdit={() => handleTodoEdit(item)}
+      onDelete={() => deleteTask(item.todo_id)}
+    />
+    , [])
+
+  const taskKeyExtractor = useCallback((item: TodoItem) => item.todo_id, [])
+
   return (
     <ScreenWrapper>
       <NewToDoItemModal
@@ -166,20 +200,13 @@ export default function Todo() {
 
       <FlatList
         data={todoList}
-        keyExtractor={(item: TodoItem) => item.todo_id}
+        keyExtractor={taskKeyExtractor}
         contentContainerStyle={styles.listContainer}
         stickyHeaderIndices={[0]}
         ListHeaderComponent={() => <ListHeader />}
         ListEmptyComponent={() => <MyAppText centered style={styles.emptyListComponent}>Please add some tasks using button on the lower right.</MyAppText>}
-        refreshControl={<RefreshControl refreshing={isLoading} onRefresh={updateTodoList} />}
-        renderItem={({ item }: any) =>
-          <TodoListItem
-            item={item}
-            handleCompletion={() => completeTask(item.todo_id)}
-            onEdit={() => handleTodoEdit(item)}
-            onDelete={() => deleteTodoItem(item)}
-          />
-        }
+        refreshControl={<RefreshControl refreshing={isLoading} onRefresh={updateTasks} />}
+        renderItem={renderTaskItem}
       />
 
       <FAB
