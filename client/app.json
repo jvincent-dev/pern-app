@@ -38,8 +38,8 @@
         {
           "file": "sentry-expo/upload-sourcemaps",
           "config": {
-            "organization": "jvincent dev",
-            "project": "pern app",
+            "organization": "jvincentdev",
+            "project": "pernapp",
             "authToken": "<add-auth-token>"
           }
         }
