@@ -10,29 +10,31 @@ import TodoListItem from '../components/TodoListItem'
 import ListHeader from '../components/ListHeader'
 
 const partitionAndSortTodos = (todoList: TodoItem[]) =>
-  todoList
-    .reduce((uncompletedAndCompleted: [TodoItem[], TodoItem[]], todoItem: TodoItem) => {
-      if (todoItem.is_completed)
-        uncompletedAndCompleted[1].push(todoItem)
-      else
-        uncompletedAndCompleted[0].push(todoItem)
+  [
+    ...todoList
+      .reduce((uncompletedAndCompleted: [TodoItem[], TodoItem[]], todoItem: TodoItem) => {
+        if (todoItem.is_completed)
+          uncompletedAndCompleted[1].push(todoItem)
+        else
+          uncompletedAndCompleted[0].push(todoItem)
 
-      return uncompletedAndCompleted
-    }, [[], []])
-    .reduce((sortedPartitionedList: TodoItem[], partitionedList: TodoItem[]) => {
-      const sortedList: TodoItem[] = partitionedList.sort((a: TodoItem, b: TodoItem) => {
-        if (a.description < b.description)
-          return -1
-        else if (a.description > b.description)
-          return 1
+        return uncompletedAndCompleted
+      }, [[], []])
+      .reduce((sortedPartitionedList: TodoItem[], partitionedList: TodoItem[]) => {
+        const sortedList: TodoItem[] = partitionedList.sort((a: TodoItem, b: TodoItem) => {
+          if (a.description < b.description)
+            return -1
+          else if (a.description > b.description)
+            return 1
 
-        return 0
-      })
+          return 0
+        })
 
-      sortedPartitionedList.push(...sortedList)
+        sortedPartitionedList.push(...sortedList)
 
-      return sortedPartitionedList
-    }, [])
+        return sortedPartitionedList
+      }, [])
+  ]
 
 const handleCompletedTask = (userId: string, todo_id: string) =>
   fetch(`${Constants.manifest.extra.todoAPI}/completed`, {
@@ -118,8 +120,6 @@ export default function Todo() {
   const completeTask = (todo_id: string) => {
     const { currentUser } = firebase.auth()
 
-    setIsLoading(true)
-
     if (currentUser)
       Alert.alert(
         'Confirm Completion',
@@ -137,10 +137,10 @@ export default function Todo() {
               setIsLoading(true)
 
               handleCompletedTask(currentUser.uid, todo_id)
-                .then(completedTask => {
+                .then((completedTask: TodoItem) => {
                   if (completedTask) {
-                    const updatedIndex: number = todoList.findIndex(listItem => listItem.todo_id === completedTask.todo_id)
                     const updatedTodoList: TodoItem[] = todoList
+                    const updatedIndex: number = updatedTodoList.findIndex((listItem: TodoItem) => listItem.todo_id === completedTask.todo_id)
 
                     updatedTodoList[updatedIndex] = completedTask
 
@@ -167,9 +167,9 @@ export default function Todo() {
       onEdit={() => handleTodoEdit(item)}
       onDelete={() => deleteTask(item.todo_id)}
     />
-    , [])
+    , [todoList])
 
-  const taskKeyExtractor = useCallback((item: TodoItem) => item.todo_id, [])
+  const taskKeyExtractor = useCallback((item: TodoItem) => item.todo_id, [todoList])
 
   return (
     <ScreenWrapper>
@@ -181,7 +181,7 @@ export default function Todo() {
             const updatedTodoList = todoList
 
             if (taskBeingEdited) {
-              const indexOfEditedItem = todoList.findIndex((listItem: TodoItem) => listItem.todo_id === updatedItem.todo_id)
+              const indexOfEditedItem = updatedTodoList.findIndex((listItem: TodoItem) => listItem.todo_id === updatedItem.todo_id)
 
               if (indexOfEditedItem !== -1)
                 updatedTodoList[indexOfEditedItem] = updatedItem
