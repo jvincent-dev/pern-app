@@ -220,7 +220,8 @@ export default function Todo() {
 
 const styles = StyleSheet.create({
   listContainer: {
-    padding: 16
+    padding: 16,
+    paddingBottom: 80
   },
   emptyListComponent: {
     marginVertical: 16
