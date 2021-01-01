@@ -7,7 +7,7 @@ import moment from 'moment'
 
 const TodoListItem = (props: any) => {
   const { item, onEdit, onDelete, handleCompletion } = props
-  const updatedTimestamp = !!item.last_edited && moment(item.last_edited).format('ddd MM/DD/YYYY')
+  const updatedTimestamp = !!item.last_edited && moment(item.last_edited).format('ddd MM/DD/YYYY[\n]hh:mm A')
 
   return (
     <View style={styles.listItem}>

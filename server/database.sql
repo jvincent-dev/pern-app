@@ -19,3 +19,7 @@ DROP COLUMN is_edited;
 
 CREATE INDEX idx_user_id
 ON todos (user_id);
+
+-- ALTER TABLE todos
+-- ALTER last_edited
+-- TYPE timestamp; -- this worked on postgresql
