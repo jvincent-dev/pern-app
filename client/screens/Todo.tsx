@@ -171,6 +171,13 @@ export default function Todo() {
 
   const taskKeyExtractor = useCallback((item: TodoItem) => item.todo_id, [todoList])
 
+  const ListHeaderComponent = useCallback(ListHeader, [])
+
+  const ListEmptyComponent = () =>
+    <MyAppText centered style={styles.emptyListComponent}>
+      Please add some tasks using button on the lower right.
+    </MyAppText>
+
   return (
     <ScreenWrapper>
       <NewToDoItemModal
@@ -203,8 +210,8 @@ export default function Todo() {
         keyExtractor={taskKeyExtractor}
         contentContainerStyle={styles.listContainer}
         stickyHeaderIndices={[0]}
-        ListHeaderComponent={() => <ListHeader />}
-        ListEmptyComponent={() => <MyAppText centered style={styles.emptyListComponent}>Please add some tasks using button on the lower right.</MyAppText>}
+        ListHeaderComponent={ListHeaderComponent}
+        ListEmptyComponent={ListEmptyComponent}
         refreshControl={<RefreshControl refreshing={isLoading} onRefresh={updateTasks} />}
         renderItem={renderTaskItem}
       />
@@ -224,7 +231,7 @@ const styles = StyleSheet.create({
     paddingBottom: 80
   },
   emptyListComponent: {
-    marginVertical: 16
+    margin: 16
   },
   floatActionButton: {
     backgroundColor: '#2d4262',
